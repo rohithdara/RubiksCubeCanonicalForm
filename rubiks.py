@@ -1,5 +1,4 @@
 import itertools
-from operator import itemgetter
 
 import numpy as np
 from tqdm import tqdm
@@ -62,21 +61,6 @@ def standardize_colors(rubiksSetting):
     for i in range(1, 7):
         colorMap[i] = listOfColors[i - 1]
     return colorMap
-
-
-def enumerateColorsOnFaces(rubiksSetting):
-    colorCounts = [[]] * 6
-    for i in range(6):
-        colorMap = {}
-        for j in range(3):
-            for k in range(3):
-                if rubiksSetting[i][j][k] not in colorMap:
-                    colorMap[rubiksSetting[i][j][k]] = 0
-                colorMap[rubiksSetting[i][j][k]] += 1
-        colorCounts[i] = sorted(colorMap.values(), reverse=True)
-    sorted_list = sorted(colorCounts, key=itemgetter(0, 1, 2), reverse=True)
-
-    return sorted_list
 
 
 # Given a 3D array representing a rubiks cube setting, this function will rotate the cube 90 degrees clockwise 3 times
@@ -168,55 +152,6 @@ def rotate_cube_orientation(rubiks_setting):
     orientationList.append(orientationD)
     orientationList.append(orientationE)
     return np.array(orientationList).tolist()
-
-
-# Given a 3D array representing a rubiks cube setting, this function will rearrange the 3D array such that all 6 possible orientations of looking at the rubiks cube are returned
-# https://stackoverflow.com/questions/2177590/how-can-i-reorder-a-list
-# def rotate_cube_orientation(rubiks_setting):
-#   # This is based on the setting 3D array order being front, left, right, back, top, bottom
-#   # orderPossibilities is a list of the 6 unique orientations that result from having each face be the front 1 time
-#   orderPossibilities = [[0, 1, 2, 3, 4, 5], [1, 3, 0, 2, 4, 5],
-#                         [2, 0, 3, 1, 4, 5], [3, 2, 1, 0, 4, 5],
-#                         [4, 1, 2, 5, 3, 0], [5, 1, 2, 4, 0, 3]]
-#   orientationList = []
-#   for j in range(6):
-#     newSetting = []
-#     if j == 0:
-#       newSetting = rubiks_setting
-#     elif j < 4:
-#       for pos in orderPossibilities[j]:
-#         if pos == 4:
-#           newSetting.append(np.rot90(orientationList[j - 1][pos]))
-#         elif pos == 5:
-#           newSetting.append(np.rot90(orientationList[j - 1][pos], k=3))
-#         else:
-#           newSetting.append(rubiks_setting[pos])
-#     elif j == 4:
-#       newSetting.append(rubiks_setting[orderPossibilities[j][0]])  #new front
-#       newSetting.append(np.rot90(rubiks_setting[orderPossibilities[j][1]],
-#                                  k=3))  # new left
-#       newSetting.append(np.rot90(
-#         rubiks_setting[orderPossibilities[j][2]]))  # new right
-#       newSetting.append(np.rot90(rubiks_setting[orderPossibilities[j][3]],
-#                                  k=2))  # new back
-#       newSetting.append(np.rot90(rubiks_setting[orderPossibilities[j][4]],
-#                                  k=2))  # new top
-#       newSetting.append(rubiks_setting[orderPossibilities[j][5]])  #new bottom
-#     elif j == 5:
-#       newSetting.append(rubiks_setting[orderPossibilities[j][0]])  #new front
-#       newSetting.append(np.rot90(rubiks_setting[orderPossibilities[j][1]],
-#                                  k=3))  # new left
-#       newSetting.append(np.rot90(
-#         rubiks_setting[orderPossibilities[j][2]]))  # new right
-#       newSetting.append(np.rot90(rubiks_setting[orderPossibilities[j][3]],
-#                                  k=2))  # new back
-#       newSetting.append(rubiks_setting[orderPossibilities[j][4]])  # new top
-#       newSetting.append(np.rot90(rubiks_setting[orderPossibilities[j][5]],
-#                                  k=2))  #new bottom
-
-#     orientationList.append(newSetting)
-
-#   return np.array(orientationList)
 
 
 # Given a 3D array representing a rubiks cube setting, this function will permute the colors of the inputted setting such that all 720 rubiks cube settings from color swappings are returned
@@ -317,22 +252,13 @@ def format_rubiks_example_file():
 
 
 if __name__ == "__main__":
-    rubiksSetting = format_single_input("input.txt")
-    print(main(rubiksSetting))
+    # rubiksSetting = format_single_input("input.txt")
+    # print(main(rubiksSetting))
 
     # Uncomment the following lines to run the program on part or all of the rubiks-example file
     #
-    # rubiksInputList = format_rubiks_example_file()
-    # mySet = set()
-    # for i in tqdm(range(len(rubiksInputList[:10]))):
-    #   mySet.add(main(rubiksInputList[i]))
-    # print(mySet)
-
-
-#  (1, 1, 1, 2, 3, 3, 4, 3, 4, 3, 5, 3, 2, 5, 5, 2, 1, 3, 4, 1, 1, 5, 1, 4, 2, 4, 5, 2, 4, 1, 5, 2, 6, 6, 2, 5, 6, 6, 4, 3, 6, 2, 2, 4, 6, 5, 3, 3, 6, 4, 1, 5, 6, 6),
-
-#  ('B', 'B', 'B', 'G', 'O', 'O', 'R', 'O', 'R', 'O', 'W', 'O', 'G', 'W', 'W', 'G', 'B', 'O', 'R', 'B', 'B', 'W', 'B', 'R', 'G', 'R', 'W', 'G', 'R', 'B', 'W', 'G', 'Y', 'Y', 'G', 'W', 'R', 'G', 'Y', 'Y', 'Y', 'R', 'Y', 'O', 'G', 'W', 'Y', 'W', 'Y', 'R', 'O', 'Y', 'B', 'O')
-
-
-#pip3 install numpy
-#pip3 install tqdm
+    rubiksInputList = format_rubiks_example_file()
+    mySet = set()
+    for i in tqdm(range(len(rubiksInputList[:10]))):
+      mySet.add(main(rubiksInputList[i]))
+    print(mySet)
