@@ -40,23 +40,23 @@ To run the tests, run `python3 -m unittest`
 
 
 ## Extra Notes
-Data Structure for holding a Rubik’s Cube Setting:
+### Data Structure for holding a Rubik’s Cube Setting:
 3D Array with dimensions as follows: 6x3x3
 - 3x3 array to hold the colors for each of the 6 faces
 - The order of the faces in the array is: front, left, right, back, top, bottom
 Easy to switch between 3D and 1D using numpy whenever convenient for development purposes
 
-What the canonical key should look like:
+### What the canonical key should look like:
 A string of numbers with length 54 holding the flattened 3D array that was determined to be the canonical form. 
 Rather than storing the array itself, storing the string will make it easy to look it up in a generic database or dictionary. 
 In my code, I provided ways to show the canonical form as a 54 length string of numbers to ignore custom coloring, a 3D 6x3x3 array with colors, and string with length 54 of the colors originally used in the inputted setting.
 
 
-A rough sketch of the “most sorted” algorithm is as follows:
+### A rough sketch of the “most sorted” algorithm is as follows:
 With a list of 6 color possibilities [c1, c2, c3, c4, c5, c6]
 Filter down this list of 17280 possibilities by finding the “most sorted” list
   * Filter down the possibilities to all lists that start with c1. If the filtered list is not empty, iterate to the next element of the possibilities and check for all possibilities with the next element being c1. Continue till you reach an empty filtered list.
   * When you reach an empty filtered list, back up to the previous iteration where the list isn’t empty and iterate to the next color (c2) and check for the next element being c2
-        * If this filtered list is not empty, iterate to the next element of the lists and reset the color back to c1. Repeat again starting with step 1
-        * If this filtered list is empty, repeat step 2 with the next color
+    * If this filtered list is not empty, iterate to the next element of the lists and reset the color back to c1. Repeat again starting with step 1
+      * If this filtered list is empty, repeat step 2 with the next color
     * When the filtered list has only 1 list in it, you have solved for the canonical form
