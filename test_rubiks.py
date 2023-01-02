@@ -17,7 +17,7 @@ class TestRubiks(unittest.TestCase):
     
     def test_face_rotations_output_length(self):
         rubiksSetting = format_single_input("input.txt")
-        self.assertEquals(4, len(rotate_face(rubiksSetting)))
+        self.assertEqual(4, len(rotate_face(rubiksSetting)))
     
     def test_rotate_cube_orientations(self):
         rubiksSetting = format_single_input("input.txt")
@@ -32,22 +32,19 @@ class TestRubiks(unittest.TestCase):
             for orientation in cubeOrientations:
                 self.assertTrue(orientation in initialOutput)
         
-        self.assertEquals(24, len(initialOutput))
+        self.assertEqual(24, len(initialOutput))
     
     def test_rotate_cube_orientations_output_length(self):
         rubiksSetting = format_single_input("input.txt")
-        self.assertEquals(6, len(rotate_cube_orientation(rubiksSetting)))
-
+        self.assertEqual(6, len(rotate_cube_orientation(rubiksSetting)))
     
     def test_permute_colors_output_length(self):
         rubiksSetting = format_single_input("input.txt")
-        self.assertEquals(720, len(permute_colors(rubiksSetting)))
+        self.assertEqual(720, len(permute_colors(rubiksSetting)))
         
     def test_solved_cube(self):
         rubiksSetting = format_single_input("solved_cube.txt")
-        self.assertEquals(main(rubiksSetting), "111111111222222222333333333444444444555555555666666666")
+        self.assertEqual(main(rubiksSetting), "111111111222222222333333333444444444555555555666666666")
             
-        
-
 if __name__ == '__main__':
     unittest.main()
