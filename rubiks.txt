@@ -1,0 +1,90 @@
+                Rubik's Cube Representation
+                ===========================
+
+In this question, we will be writing one of the core components of a
+database program for storing users' solutions to the Rubik's Cube
+puzzle.
+
+See this link for an online version of the Rubik's Cube puzzle:
+
+  https://rubiks-cube-solver.com
+
+The ultimate goal of the database is for users to be able to type in
+the current setting of their Rubik's Cube, and look up whether anyone
+else has submitted a solution for that particular setting.
+
+There are two main obstacles that need to be solved:
+
+1) Rubik's Cubes are three-dimensional objects, and we don't know the
+orientation in which the user happens to be holding the cube when
+typing in their cube's setting.
+
+2) A lot of Rubik's Cubes don't come in standard colors,
+
+  https://ruwix.com/pics/articles/rubiks-cube-sticker-mods.jpg
+
+so the colors of the user's cube may not match the colors of the
+cubes in the database.
+
+We will solve this by first converting all Rubik's cube settings into
+a "canonical form" before storing it or looking it up from the
+database. The idea is that all "identical" Rubik's cube settings would
+have the same "canonical form", and therefore can be easily used as a
+key in the database.
+
+Problem
+=======
+
+1) Design a datastructure for representing the setting of a Rubik's Cube. 
+
+2) Design and implement the procedure for computing the canonical form
+of this datastructure. Explain clearly how this procedure works, and
+what is the canonical form that you have chosen.
+
+   Explain how you've broken down this problem into smaller stages.
+
+3) Show your computed canonical form for the 17280 cube settings in
+'rubiks-example.txt'.
+
+Example Text File
+=================
+
+We've attached a text file that shows an example of the canonical form
+that our reference implementation uses.
+
+We use a flattened textual representation of the cube to represent its
+settings:
+
+        Y Y R 
+        G Y O 
+        O R Y 
+  W W W R W W O R W G B G 
+  O G G B W R B O Y O B B 
+  R G R O R B Y O B O W G 
+        B G G 
+        Y R W 
+        B Y Y 
+
+where the letters correspond to the colors:
+
+  Y: Yellow
+  R: Red
+  G: Green
+  O: Orange
+  B: Blue
+  W: White
+
+In the text file are 17280 textual representations that all represent
+the same Rubik's cube setting, but in different orientations and with
+colors swapped. I.e. We started with a random Rubik's cube setting and
+then viewed it from all sorts of different angles, and randomly
+swapped all the blue squares with yellow squares, and all white
+squares with green squares, etc. There are, in total, up to 17280
+different ways the same Rubik's cube setting can be randomly permuted.
+We consider these settings "identical" because changing the angle we
+view the cube and shuffling colors around does not affect the steps we
+need to take in order to solve it. Thus all of these settings have the
+same canonical form.
+
+The canonical form that is calculated by our reference implementation
+is shown first, but you are free to design your own canonical form.
