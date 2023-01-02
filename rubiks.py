@@ -252,13 +252,13 @@ def format_rubiks_example_file():
 
 
 if __name__ == "__main__":
-    # rubiksSetting = format_single_input("input.txt")
-    # print(main(rubiksSetting))
+    rubiksSetting = format_single_input("input.txt")
+    print(main(rubiksSetting))
 
     # Uncomment the following lines to run the program on part or all of the rubiks-example file
     #
-    rubiksInputList = format_rubiks_example_file()
-    mySet = set()
-    for i in tqdm(range(len(rubiksInputList[:10]))):
-      mySet.add(main(rubiksInputList[i]))
-    print(mySet)
+#     rubiksInputList = format_rubiks_example_file()
+#     mySet = set()
+#     for i in tqdm(range(len(rubiksInputList[:10]))):
+#       mySet.add(main(rubiksInputList[i]))
+#     print(mySet)
