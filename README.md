@@ -55,8 +55,8 @@ In my code, I provided ways to show the canonical form as a 54 length string of 
 A rough sketch of the “most sorted” algorithm is as follows:
 With a list of 6 color possibilities [c1, c2, c3, c4, c5, c6]
 Filter down this list of 17280 possibilities by finding the “most sorted” list
-    1. Filter down the possibilities to all lists that start with c1. If the filtered list is not empty, iterate to the next element of the possibilities and check for all possibilities with the next element being c1. Continue till you reach an empty filtered list.
-    2. When you reach an empty filtered list, back up to the previous iteration where the list isn’t empty and iterate to the next color (c2) and check for the next element being c2
-        1. If this filtered list is not empty, iterate to the next element of the lists and reset the color back to c1. Repeat again starting with step 1
-        2. If this filtered list is empty, repeat step 2 with the next color
-    3. When the filtered list has only 1 list in it, you have solved for the canonical form
+  * Filter down the possibilities to all lists that start with c1. If the filtered list is not empty, iterate to the next element of the possibilities and check for all possibilities with the next element being c1. Continue till you reach an empty filtered list.
+  * When you reach an empty filtered list, back up to the previous iteration where the list isn’t empty and iterate to the next color (c2) and check for the next element being c2
+        * If this filtered list is not empty, iterate to the next element of the lists and reset the color back to c1. Repeat again starting with step 1
+        * If this filtered list is empty, repeat step 2 with the next color
+    * When the filtered list has only 1 list in it, you have solved for the canonical form
